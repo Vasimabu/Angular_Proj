@@ -1,0 +1,24 @@
+/* Custom styles */
+.table-hover tbody tr:hover {
+  background-color: #f5f5f5; /* Hover effect */
+}
+
+/* Center the text inside table cells */
+.table td, .table th {
+  text-align: center;
+  vertical-align: middle; /* Centers vertically */
+  padding: 15px 10px; /* Adds space around the text inside each cell */
+}
+
+/* Add space between table rows */
+.table {
+  border-spacing:0 10px; /* Adds vertical space between rows */
+  /* border-collapse: separate; Prevents the collapse of table borders, enabling spacing */
+}
+
+/* Styling for actions column */
+.actions-btns {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}

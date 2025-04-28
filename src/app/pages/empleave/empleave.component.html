@@ -1,0 +1,121 @@
+<div class="container mt-5 d-flex justify-content-between">
+    <h3>Leave Type</h3>
+    <button class="btn btn-primary" (click)="isFormVisiable.set(true)">Add Leavereq</button>
+  </div>
+  @if(isFormVisiable()){
+  <form>
+    <div class="mt-3 row">
+      <div class="col-md-6">
+        <label for="leaveId" class="form-label small">leaveId</label>
+        <input type="number" class="form-control input-sm" formControlName="leaveId" id="leaveId" >
+      </div>
+
+      <div class="col-md-4">
+        <label for="employeeId" class="form-label small">employeeId</label>
+        <select class="form-control" formControlName="Employee Id">
+            <option value="">Select</option>
+            @for (item of empList$ | async; track $index) {
+                <option [value]="item.employeeId">{{item.employeeId}}</option>
+
+            }
+        </select>
+      </div>
+    </div>
+    <div class="mt-3 row">
+        <div class="col-md-6">
+          <label for="leaveTypeId" class="form-label small">Leave Type ID</label>
+          <input type="number" class="form-control input-sm" formControlName="leaveTypeId" id="leaveTypeId" >
+        </div>
+  
+        <div class="col-md-6">
+          <label for="startDate" class="form-label small">startDate</label>
+          <input type="date" class="form-control input-sm" formControlName="startDate"  id="startDate" >
+        </div>
+      </div>
+      <div class="mt-3 row">
+        <div class="col-md-6">
+          <label for="endDate" class="form-label small">endDate</label>
+          <input type="date" class="form-control input-sm" formControlName="endDate" id="endDate" >
+        </div>
+  
+        <div class="col-md-6">
+          <label for="status" class="form-label small">status</label>
+          <input type="text" class="form-control input-sm" formControlName="status"  id="status" >
+        </div>
+      </div>
+      <div class="mt-3 row">
+        <div class="col-md-6">
+          <label for="reason" class="form-label small">reason</label>
+          <input type="text" class="form-control input-sm" formControlName="reason" id="reason" >
+        </div>
+  
+        <div class="col-md-6">
+          <label for="requestDate" class="form-label small">requestDate</label>
+          <input type="date" class="form-control input-sm" formControlName="requestDate"  id="requestDate" >
+        </div>
+      </div>
+    <button type="submit" class="btn btn-success mt-3" (click)="onSave()">Submit</button>
+    <button  class="btn btn-danger mt-3" (click)="isFormVisiable.set(false)">Close</button>
+  </form>
+}
+
+<h3>All Employee Leave Req</h3>
+<div class="container mt-5">
+    <table class="table table-bordered  the">
+      <thead>
+        <tr class="table-dark">
+          <!-- <th>No.Of Emp</th> -->
+          <th>LeaveId</th>
+          <th>EmployeeId</th>
+          <th>LeaveTypeId</th>
+          <th>StartDate</th>
+          <th>EndDate</th>
+          <th>Reason</th>
+          <th>RequestDate</th>
+          <th>EmployeeName</th>
+          <th>ContactNo</th>
+          <th>TypeName</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for(item of leavereq(); track $index) {
+        <tr>
+          <!-- <td>{{$index+1}}</td> -->
+          <td>{{ item.leaveId}}</td>
+          <td>{{ item.employeeId}}</td>
+          <td>{{item.leaveTypeId}}</td>
+          <td>{{item.startDate}}</td>
+          <td>{{item.endDate}}</td>
+          <td>{{item.reason}}</td>
+          <td>{{item.requestDate}}</td>
+          <td>{{item.employeeName}}</td>
+          <td>{{item.contactNo}}</td>
+          <td>{{item.typeName}}</td>
+          <!-- @if(item.status=="Approved"){
+            <button style="background-color: green; color: white; border: none; padding: 5px 10px;">
+                Approved
+              </button>
+          }@else{
+            <button style="background-color: rgb(203, 14, 14); color: white; border: none; padding: 5px 10px;">
+                Canceled
+              </button>
+          } -->
+          <td>
+            <ng-container *ngIf="item.status === 'Approved'; else canceledTemplate">
+              <button style="background-color: green; color: white; border: none; padding: 5px 10px;">
+                Approved
+              </button>
+            </ng-container>
+            <ng-template #canceledTemplate>
+              <button style="background-color: red; color: white; border: none; padding: 5px 10px;">
+                Canceled
+              </button>
+            </ng-template>
+          </td>
+          
+        </tr>
+    }
+      </tbody>
+    </table>
+ </div>

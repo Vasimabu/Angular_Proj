@@ -1,0 +1,92 @@
+<div class="container my-4">
+    <div class="row">
+      <!-- Project Employees Table (Left side) -->
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header bg-warning">
+            <h5>Project Employee List</h5>
+          </div>
+          <div class="card-body">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Emp Project ID</th>
+                  <th>Project Name</th>
+                  <th>Lead By</th>
+                  <th>Assigned Date</th>
+                  <th>Role</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of projectEmp(); let i = index">
+                  <td>{{ i + 1 }}</td>
+                  <td>{{ projectNameMap[item.projectId] || 'Unknown Project' }}</td> <!-- Show project name -->
+                  <td>{{ employeeNameMap[item.empId] || 'Unknown Employee' }}</td> <!-- Show employee name -->
+                  <td>{{ item.assignedDate }}</td>
+                  <td>{{ item.role }}</td>
+                  <td>
+                    <div class="actions-btns">
+                      <button class="btn btn-sm btn-primary" (click)="onEdit(item.empProjectId)">Edit</button>
+                      <button class="btn btn-sm btn-danger" (click)="onDelete(item.empProjectId)">Delete</button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+              
+            </table>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Project Employee Form (Right side) -->
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-header" style="background-color: rgb(41, 119, 94);">
+            <h5>Add New Project Employee</h5>
+          </div>
+          <div class="card-body">
+            <form class="mb-4"  [formGroup]="projectForm">
+              <div class="row">
+                <div class="col-md-6">
+                  <label for="projectId" class="form-label">Project ID</label>
+                  <select formcontrolname="projectId" class="form-select">
+                    <option value="">Select</option>
+                    @for (item of projList$ | async; track $index) {
+                        <option [value]="item.projectName">{{item.projectName}}</option>
+                    }
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <label for="empId" class="form-label">Employee ID</label>
+                  <select class="form-control" formControlName="Employee Id">
+                    <option value="">Select</option>
+                    @for (item of empList$ | async; track $index) {
+                        <option [value]="item.employeeId">{{item.employeeName}}</option>
+
+                    }
+                </select>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <label for="assignedDate" class="form-label">Assigned Date</label>
+                  <input type="date" formcontrolname="assignedDate" id="assignedDate" class="form-control">
+                </div>
+                <div class="col-md-6">
+                  <label for="roleProjectEmployee" class="form-label">Role</label>
+                  <input type="text" formcontrolname="role" id="roleProjectEmployee" class="form-control" placeholder="Enter role">
+                </div>
+                <div class="col-md-6">
+                  <label for="isActive" class="form-label">Is Active</label>
+                  <input type="checkbox" formcontrolname="isActive" id="isActive" class="form-control">
+                </div>
+              </div>
+              <button type="button" (click)="onSaveProjEmp()" class="btn btn-primary mt-3">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

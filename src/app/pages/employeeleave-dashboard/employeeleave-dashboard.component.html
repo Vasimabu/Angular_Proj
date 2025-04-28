@@ -1,0 +1,47 @@
+<div class="container mt-5">
+    <!-- Dashboard Header -->
+    <div class="row mb-4">
+      <div class="col text-center">
+        <h2>Employee Leave Dashboard</h2>
+        <p class="text-muted">Overview of employee leave statistics</p>
+      </div>
+    </div>
+  
+    <!-- Statistics Cards -->
+    <div class="row text-center">
+        <div class="col-md-3 mb-3">
+          <div class="card bg-info text-white">
+            <div class="card-body">
+              <h5 class="card-title">Earned Leave</h5>
+              <p class="card-text" id="earnedLeave">{{ leavedashboard.earnedLeave }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 mb-3">
+          <div class="card bg-primary text-white">
+            <div class="card-body">
+              <h5 class="card-title">New Leave Requests</h5>
+              <p class="card-text" id="totalNewLeaves">{{ leavedashboard.totalNewLeaves }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 mb-3">
+          <div class="card bg-success text-white">
+            <div class="card-body">
+              <h5 class="card-title">Approved Leaves</h5>
+              <p class="card-text" id="totalApprovedLeaves">{{ leavedashboard.totalApprovedLeaves }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 mb-3">
+          <div class="card bg-danger text-white">
+            <div class="card-body">
+              <h5 class="card-title">Canceled Leaves</h5>
+              <p class="card-text" id="totalCanceledLeave">{{ leavedashboard.totalCanceledLeave }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+  </div>
+  

@@ -1,0 +1,81 @@
+<div class="container mt-5 d-flex justify-content-between">
+    <h3>Employee Leave Dashboard</h3>
+    <button class="btn btn-primary" (click)="isFormVisiable.set(true)">Add Employee Leave</button>
+  </div>
+  
+  <!-- Conditional Form Display -->
+  @if(isFormVisiable()){
+    <div class="container mt-3">
+        <h3>Add or Update Employee Leave Record</h3>
+        <form  [formGroup]="projectForm">
+          <div class="mt-3 row">
+            <div class="col-md-6">
+              <label for="earnedLeaveId" class="form-label small">Earned Leave ID</label>
+              <input type="number" class="form-control input-sm" formControlName="earnedLeaveId" id="earnedLeaveId" >
+            </div>
+      
+            <div class="col-md-6">
+              <label for="employeeId" class="form-label small">Employee ID</label>
+              <input type="number" class="form-control input-sm" formControlName="employeeId"  id="employeeId" >
+            </div>
+          </div>
+    
+          <div class="mt-3 row">
+            <div class="col-md-6">
+              <label for="totalEarnedLeaves" class="form-label small">Total Earned Leaves</label>
+              <input type="number" class="form-control input-sm" formControlName="totalEarnedLeaves" id="totalEarnedLeaves" >
+            </div>
+      
+            <div class="col-md-6">
+              <label for="totalSickEarnedLeaves" class="form-label small">Total Sick Earned Leaves</label>
+              <input type="number" class="form-control input-sm" formControlName="totalSickEarnedLeaves" id="totalSickEarnedLeaves" >
+            </div>
+          </div>
+    
+          <div class="mt-3 row">
+            <div class="col-md-6">
+              <label for="lastUpdatedDate" class="form-label small">Last Updated Date</label>
+              <input type="datetime-local" class="form-control input-sm" formControlName="lastUpdatedDate"  id="lastUpdatedDate" >
+            </div>
+          </div>
+    
+          <button type="submit" class="btn btn-success mt-3" (click)="onSave()">Submit</button>
+          <button  class="btn btn-danger mt-3" (click)="isFormVisiable.set(false)">Close</button>
+        </form>
+    </div>
+    
+}
+  
+  <!-- Employee Table -->
+  <div class="container mt-5">
+    <table class="table table-striped">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Employee ID</th>
+          <th scope="col">Employee Name</th>
+          <th scope="col">Earned Leave ID</th>
+          <th scope="col">Total Earned Leaves</th>
+          <th scope="col">Total Sick Earned Leaves</th>
+          <th scope="col">Last Updated Date</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of Earnedleave(); let i = index; trackBy: trackByIndex">
+          <td>{{ i + 1 }}</td>
+          <td>{{ item.employeeId }}</td>
+          <td>{{ item.earnedLeaveId }}</td>
+          <td>{{ item.totalEarnedLeaves }}</td>
+          <td>{{ item.totalSickEarnedLeaves }}</td>
+          <td>{{ item.lastUpdatedDate | date: 'yyyy-MM-dd HH:mm' }}</td>
+          <td>
+            <button class="btn btn-primary btn-sm me-2" (click)="onEdit(item.employeeId)">Edit</button>
+            <button class="btn btn-danger btn-sm" (click)="deleteLeave(item.earnedLeaveId)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+ </div>
+
+  
+  

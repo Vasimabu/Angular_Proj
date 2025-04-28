@@ -1,0 +1,46 @@
+<div class="container mt-5 d-flex justify-content-between">
+    <h3>Leave Type</h3>
+    <button class="btn btn-primary" (click)="isFormVisiable.set(true)">Add Leave Type</button>
+  </div>
+  @if(isFormVisiable()){
+  <form>
+    <div class="mt-3 row">
+      <div class="col-md-6">
+        <label for="earnedLeaveId" class="form-label small">Leave Type ID:</label>
+        <input type="number" class="form-control input-sm" formControlName="earnedLeaveId" id="earnedLeaveId" >
+      </div>
+
+      <div class="col-md-6">
+        <label for="employeeId" class="form-label small">Type Name:</label>
+        <input type="text" class="form-control input-sm" formControlName="typeName"  id="typeName" >
+      </div>
+    </div>
+    <button type="submit" class="btn btn-success mt-3" (click)="onSave()">Submit</button>
+    <button  class="btn btn-danger mt-3" (click)="isFormVisiable.set(false)">Close</button>
+  </form>
+}
+<div class="container mt-5">
+    <table class="table table-bordered  the">
+      <thead>
+        <tr class="table-dark">
+          <th>No.Of Emp</th>
+          <th>Leave-Type ID</th>
+          <th>Type-Name</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for(item of leavetype(); track $index) {
+        <tr>
+          <td>{{$index+1}}</td>
+          <td>{{ item.leaveTypeId}}</td>
+          <td>{{ item.typeName}}</td>
+          <td>
+            <button class="btn btn-primary btn-sm me-2" (click)="onEdit()">Edit</button>
+            <button class="btn btn-danger btn-sm" (click)="deleteLeave()">Delete</button>
+          </td>
+        </tr>
+    }
+      </tbody>
+    </table>
+ </div>
